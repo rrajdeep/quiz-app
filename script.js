@@ -273,66 +273,33 @@ const bootstrapQuiz = [
     }
 ];
 
-
-
-var x = document.getElementsByClassName('enterBtn');
+var count;
+var counter;
 var user = '';
-x[0].addEventListener('click', function () {
+var enterBtn = document.getElementsByClassName('enterBtn');
+enterBtn[0].addEventListener('click', function () {
     user = document.getElementsByName('user')[0].value;
     document.getElementById('userName').innerHTML = "Hello " + user;
     document.getElementsByTagName('h3')[0].innerHTML = "Please select a category to continue...";
+
 });
 
-
-
-// Start Timer function
-var count;
-var counter;
-function startTimer() {
-    count = 100;
-    counter = setInterval(function () {
-        if (count > 0) {
-            timer.innerHTML = count;
-            count--;
-        } else {
-            timer.innerHTML = "0";
-            clearTimeout(counter);
-
-        }
-    }, 1000);
-}
-
-// Stop Timer Function
-function stopTimer() {
-    timer.innerHTML = count;
-    clearInterval(counter);
-}
-
-// Button disable function
-function disableButton() {
-    for(let i = 0; i <=3; i++) {
-        optBtn[i].disabled = true;
-    }
-}
-
-function enableButton() {
-    for(let i = 0; i <=3; i++) {
-        optBtn[i].disabled = false;
-    }
-}
-
-    const question = document.getElementById('question-box');
-    const score = document.getElementById('score');
-    const timer = document.getElementById('timer');
-    const optBtn = document.getElementsByClassName('option');
-    const next = document.getElementById('next');
-    var quizName;
+const question = document.getElementById('question-box');
+const score = document.getElementById('score');
+const timer = document.getElementById('timer');
+const optBtn = document.getElementsByClassName('option');
+const next = document.getElementById('next');
+const quizContainer = document.getElementById('quiz-container');
+const quizResult = document.getElementById('quizResult');
+const resultButton = document.getElementById('resultBtn');
+const startAgain = document.getElementById('restartQuiz');
+var quizName;
 
 function quizStart(qname) {
     quizName = qname;
     var quizArray = [];
     document.getElementById('show').style.display = 'none';
-    document.getElementById('quiz-container').style.display = 'block';
+    quizContainer.style.display = 'block';
     document.getElementById('quiz-header').innerHTML = qname.toUpperCase();
     var start = true;
     var qNo = 0;
@@ -340,17 +307,17 @@ function quizStart(qname) {
     var incorrectQues = 0;
     var quizScore = 0;
 
-    switch(quizName) {
+    switch (quizName) {
         case 'html': Array.prototype.push.apply(quizArray, htmlQuiz);
             break;
-        case 'css' : Array.prototype.push.apply(quizArray, cssQuiz);
+        case 'css': Array.prototype.push.apply(quizArray, cssQuiz);
             break;
         case 'javascript': Array.prototype.push.apply(quizArray, jsQuiz);
             break;
-        case 'bootstrap' : Array.prototype.push.apply(quizArray, bootstrapQuiz); 
+        case 'bootstrap': Array.prototype.push.apply(quizArray, bootstrapQuiz);
             break;
         default:
-            break;  
+            break;
     }
 
     startTimer();
@@ -374,6 +341,7 @@ function quizStart(qname) {
                 optBtn[0].style.backgroundColor = "red";
                 incorrectQues += 1;
             }
+            score.innerHTML = quizScore;
             disableButton();
         }
         optBtn[1].onclick = function () {
@@ -386,6 +354,7 @@ function quizStart(qname) {
                 optBtn[1].style.backgroundColor = "red";
                 incorrectQues += 1;
             }
+            score.innerHTML = quizScore;
             disableButton();
         }
         optBtn[2].onclick = function () {
@@ -400,6 +369,7 @@ function quizStart(qname) {
                 optBtn[2].style.backgroundColor = "red";
                 incorrectQues += 1;
             }
+            score.innerHTML = quizScore;
             disableButton();
         }
         optBtn[3].onclick = function () {
@@ -412,10 +382,11 @@ function quizStart(qname) {
                 optBtn[3].style.backgroundColor = "red";
                 incorrectQues += 1;
             }
+            score.innerHTML = quizScore;
             disableButton();
         }
 
-        score.innerHTML = quizScore;
+        // score.innerHTML = quizScore;
     }
 
     if (start) {
@@ -436,46 +407,75 @@ function quizStart(qname) {
         } else {
             stopTimer();
             // next.style.display = 'none';
-            document.getElementById('resultBtn').style.display = "inline";
+            resultButton.style.display = "inline";
         }
-        
-
     }
 
-
-    const result = document.getElementById('resultBtn');
-    result.addEventListener('click', () => {
-        document.getElementById('quiz-container').style.display = 'none';
+    resultButton.addEventListener('click', () => {
+        quizContainer.style.display = 'none';
         document.getElementById('user').innerHTML = user;
         document.getElementById('timeTaken').innerHTML = (100 - count) + " seconds"
         document.getElementById('attemptedQues').innerHTML = correctQues + incorrectQues;
         document.getElementById('correctQues').innerHTML = correctQues;
         document.getElementById('wrongQues').innerHTML = incorrectQues;
         document.getElementById('percenQues').innerHTML = (quizScore * 10) + '%';
-        document.getElementById('quizResult').style.display = 'block';
-
+        quizResult.style.display = 'block';
     });
 }
 
 const goHome = document.getElementById('goHome');
 goHome.onclick = function () {
-    document.getElementById('show').style.display = 'block';
-    document.getElementById('quizResult').style.display = 'none';
-    start = true;
     quizName = '';
-    document.getElementById('next').style.display = 'inline';
-    document.getElementById('resultBtn').style.display = "none";
+    start = true;
+    document.getElementById('show').style.display = 'block';
+    quizResult.style.display = 'none';
+    next.style.display = 'inline';
+    resultButton.style.display = "none";
     enableButton();
 }
 
-const startAgain = document.getElementById('restartQuiz');
+
 startAgain.onclick = function () {
-    document.getElementById('quiz-container').style.display = 'block';
-    document.getElementById('quizResult').style.display = 'none';
-    document.getElementById('resultBtn').style.display = "none";
-    
-    document.getElementById('next').style.display = 'inline';
+    quizContainer.style.display = 'block';
+    quizResult.style.display = 'none';
+    resultButton.style.display = "none";
+
+    next.style.display = 'inline';
     quizStart(quizName);
     enableButton();
+}
 
+// Start Timer function
+function startTimer() {
+    count = 100;
+    counter = setInterval(function () {
+        if (count > 0) {
+            timer.innerHTML = count;
+            count--;
+        } else {
+            timer.innerHTML = "0";
+            clearTimeout(counter);
+
+        }
+    }, 1000);
+}
+
+// Stop Timer Function
+function stopTimer() {
+    timer.innerHTML = count;
+    clearInterval(counter);
+}
+
+//Enable button function
+function enableButton() {
+    for (let i = 0; i <= 3; i++) {
+        optBtn[i].disabled = false;
+    }
+}
+
+// Button disable function
+function disableButton() {
+    for (let i = 0; i <= 3; i++) {
+        optBtn[i].disabled = true;
+    }
 }
