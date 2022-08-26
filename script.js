@@ -283,11 +283,11 @@ x[0].addEventListener('click', function () {
     document.getElementsByTagName('h3')[0].innerHTML = "Please select a category to continue...";
 });
 
-var quizName;
-var count;
-var counter;
+
 
 // Start Timer function
+var count;
+var counter;
 function startTimer() {
     count = 100;
     counter = setInterval(function () {
@@ -308,6 +308,25 @@ function stopTimer() {
     clearInterval(counter);
 }
 
+// Button disable function
+function disableButton() {
+    for(let i = 0; i <=3; i++) {
+        optBtn[i].disabled = true;
+    }
+}
+
+function enableButton() {
+    for(let i = 0; i <=3; i++) {
+        optBtn[i].disabled = false;
+    }
+}
+
+    const question = document.getElementById('question-box');
+    const score = document.getElementById('score');
+    const timer = document.getElementById('timer');
+    const optBtn = document.getElementsByClassName('option');
+    const next = document.getElementById('next');
+    var quizName;
 
 function quizStart(qname) {
     quizName = qname;
@@ -320,11 +339,6 @@ function quizStart(qname) {
     var correctQues = 0;
     var incorrectQues = 0;
     var quizScore = 0;
-
-    const question = document.getElementById('question-box');
-    const score = document.getElementById('score');
-    const timer = document.getElementById('timer');
-    const optBtn = document.getElementsByClassName('option');
 
     switch(quizName) {
         case 'html': Array.prototype.push.apply(quizArray, htmlQuiz);
@@ -350,20 +364,17 @@ function quizStart(qname) {
             optBtn[i].innerText = quizArray[qNo].options[i];
         }
 
-
-
         optBtn[0].onclick = function () {
             if (optBtn[0].value == quizArray[qNo].correct) {
                 quizScore += 1;
                 correctQues += 1;
                 console.log(quizScore);
                 optBtn[0].style.backgroundColor = "green";
-
-
             } else {
                 optBtn[0].style.backgroundColor = "red";
                 incorrectQues += 1;
             }
+            disableButton();
         }
         optBtn[1].onclick = function () {
             if (optBtn[1].value == quizArray[qNo].correct) {
@@ -375,6 +386,7 @@ function quizStart(qname) {
                 optBtn[1].style.backgroundColor = "red";
                 incorrectQues += 1;
             }
+            disableButton();
         }
         optBtn[2].onclick = function () {
             if (optBtn[2].value == quizArray[qNo].correct) {
@@ -388,6 +400,7 @@ function quizStart(qname) {
                 optBtn[2].style.backgroundColor = "red";
                 incorrectQues += 1;
             }
+            disableButton();
         }
         optBtn[3].onclick = function () {
             if (optBtn[3].value == quizArray[qNo].correct) {
@@ -399,6 +412,7 @@ function quizStart(qname) {
                 optBtn[3].style.backgroundColor = "red";
                 incorrectQues += 1;
             }
+            disableButton();
         }
 
         score.innerHTML = quizScore;
@@ -409,21 +423,19 @@ function quizStart(qname) {
         quiz(0);
     }
 
-    const next = document.getElementById('next');
-
     next.onclick = function () {
         start = false;
-        if (qNo < 10) {
-
+        if (qNo < 9) {
             for (let k = 0; k < 4; k++) {
                 optBtn[k].style.backgroundColor = "buttonface";
             }
+            enableButton();
             qNo++;
             quiz(qNo);
             // console.log(qNo);
         } else {
             stopTimer();
-            next.style.display = 'none';
+            // next.style.display = 'none';
             document.getElementById('resultBtn').style.display = "inline";
             // stopTimer();
         }
