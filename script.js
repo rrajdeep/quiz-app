@@ -425,10 +425,10 @@ function quizStart(qname) {
 
     next.onclick = function () {
         start = false;
+        for (let k = 0; k < 4; k++) {
+            optBtn[k].style.backgroundColor = "buttonface";
+        }
         if (qNo < 9) {
-            for (let k = 0; k < 4; k++) {
-                optBtn[k].style.backgroundColor = "buttonface";
-            }
             enableButton();
             qNo++;
             quiz(qNo);
@@ -437,8 +437,8 @@ function quizStart(qname) {
             stopTimer();
             // next.style.display = 'none';
             document.getElementById('resultBtn').style.display = "inline";
-            // stopTimer();
         }
+        
 
     }
 
@@ -465,6 +465,7 @@ goHome.onclick = function () {
     quizName = '';
     document.getElementById('next').style.display = 'inline';
     document.getElementById('resultBtn').style.display = "none";
+    enableButton();
 }
 
 const startAgain = document.getElementById('restartQuiz');
@@ -472,7 +473,9 @@ startAgain.onclick = function () {
     document.getElementById('quiz-container').style.display = 'block';
     document.getElementById('quizResult').style.display = 'none';
     document.getElementById('resultBtn').style.display = "none";
-    quizStart(quizName);
+    
     document.getElementById('next').style.display = 'inline';
+    quizStart(quizName);
+    enableButton();
 
 }
