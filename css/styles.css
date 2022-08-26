@@ -8,10 +8,7 @@ body {
   width: 60%;
   margin: 20px auto auto auto;
   padding: 30px;
-  /* margin-left: auto;
-  margin-right: auto; */
   border-radius: 10px;
-  /* border: 2px solid #000; */
   box-shadow: 5px 5px 10px #ccc;
 }
 
@@ -49,21 +46,18 @@ h1 {
   color: #289be7;
 }
 
-.tenSecondPara {
+.userInstruction {
   font-family: sans-serif, Verdana;
   color: rgb(116, 115, 115);
 }
-
 
 .category-div {
   margin: 20px 25px;
 }
 
-
 .timer-score-container {
   display: grid;
   grid-template-columns: auto auto;
-  /* padding: auto; */
   margin-bottom: 4rem;
 }
 
@@ -78,10 +72,10 @@ h1 {
 }
 
 #timer {
-  /* font-size: larger; */
   font-weight: bolder;
   font-size: 1.4rem;
 }
+
 .score {
   text-align: right;
   font-size: 1.5rem;
@@ -117,7 +111,6 @@ h1 {
   text-align: center;
   display: block;
   position: relative;
-  /* margin-top: 100px; */
   border: 2px solid rgb(100, 99, 99);
 }
 
