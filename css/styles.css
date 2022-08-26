@@ -78,9 +78,9 @@ h1 {
 }
 
 #timer {
-  font-size: larger;
-  font-weight: 100;
-  font-style: bold;
+  /* font-size: larger; */
+  font-weight: bolder;
+  font-size: 1.4rem;
 }
 .score {
   text-align: right;
