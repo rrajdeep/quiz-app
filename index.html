@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Quiz App</title>
+  <title>Quiz App - By Rajdeep</title>
+  <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="./css/styles.css">
 </head>
 
@@ -18,7 +19,7 @@
         <h3>Enter your name to continue the Quiz.</h3>
         <input type="text" name="user" value="" placeholder="ENTER YOUR NAME...">
         <button class="enterBtn" type="submit" name="button">ENTER</button>
-        <p class="tenSecondPara">You will have 10 seconds to answer each questions</p>
+        <p class="userInstruction">You will have 10 seconds to answer each questions</p>
       </div>
       <hr>
       <div class="category-div">
@@ -30,6 +31,8 @@
         <button class="categoryBtn" type="button" name="bootstrap" onclick="quizStart(name)">Bootstrap</button>
       </div>
     </div>
+
+    <!-- Quiz Container -->
     <div id="quiz-container" style="display:none;">
       <h3 id="quiz-header"></h3>
       <!-- Timer and score div -->
@@ -40,7 +43,7 @@
           </div>
         </div>
         <div class="score">
-          <p>SCORE: <span id="score" style="text-decoration: bold;"></span></p>
+          <p>SCORE: <b><span id="score"></span></b></p>
         </div>
       </div>
       <!-- Question Box -->
@@ -48,20 +51,17 @@
         <div id="ques-no-box">
           <h2 id="ques-number"></h2>
         </div>
-        <div id="question-box">
-          
-        </div>
-
+        <div id="question-box"></div>
       </div>
       <!-- Options div -->
-      <div id="options">
+      <div>
         <button class="option" type="button" value="1"></button>
         <button class="option" type="button" value="2"></button>
         <br>
         <button class="option" type="button" value="3"></button>
         <button class="option" type="button" value="4"></button>
       </div>
-      <!-- next and Result button -->
+      <!-- Next button and Result button -->
       <button id="next" type="button">Next</button>
       <button class="resultBtn" id="resultBtn" type="button" style="display: none">Result</button>
     </div>
@@ -69,18 +69,17 @@
     <!-- Quiz Result div -->
     <div id="quizResult" style="display: none">
       <h1>Quiz Result</h1>
-      <h3><span id="user"></span> your result is:</h3>
-      <h3>Total time taken : <span id="timeTaken"></span></h3>
-      <h3>Total question : <span>10</span></h3>
-      <h3>Attempt : <span id="attemptedQues"></span></h3>
-      <h3>Correct : <span id="correctQues"></span></h3>
-      <h3>Wrong : <span id="wrongQues"></span></h3>
-      <h3>Percentage : <span id="percenQues"></span></h3>
+      <p><b><span id="user"></span></b> your result is:</p>
+      <p>Total time taken : <b><span id="timeTaken"></span></b></p>
+      <p>Total question : <b><span>10</span></b></p>
+      <p>Attempt : <b><span id="attemptedQues"></span></b></p>
+      <p>Correct : <b><span id="correctQues"></span></b></p>
+      <p>Wrong : <b><span id="wrongQues"></span></b></p>
+      <p>Percentage : <b><span id="percenQues"></span></b></p>
       <button id="restartQuiz" class="enterBtn">Start Again</button>
       <button id="goHome" class="enterBtn">Go to Home</button>
     </div>
   </div>
   <script type="text/javascript" src="script.js"></script>
 </body>
-
 </html>
