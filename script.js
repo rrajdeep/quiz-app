@@ -1,3 +1,5 @@
+
+// HTML Quiz Array:
 const htmlQuiz = [
     {
         qNo: 0,
@@ -70,6 +72,7 @@ const htmlQuiz = [
     }
 ];
 
+// CSS Quiz Array:
 const cssQuiz = [
     {
         qNo: 0,
@@ -141,6 +144,7 @@ const cssQuiz = [
 
 ];
 
+// JavaScript Quiz Array:
 const jsQuiz = [
     {
         qNo: 0,
@@ -204,6 +208,7 @@ const jsQuiz = [
     }
 ];
 
+// Bootstrap Quiz Array:
 const bootstrapQuiz = [
     {
         qNo: 0,
@@ -273,9 +278,12 @@ const bootstrapQuiz = [
     }
 ];
 
+// Declaring necessary variables globally:
 var count;
 var counter;
 var user = '';
+
+// Getting user name and saying hello:
 var enterBtn = document.getElementsByClassName('enterBtn');
 enterBtn[0].addEventListener('click', function () {
     user = document.getElementsByName('user')[0].value;
@@ -284,6 +292,7 @@ enterBtn[0].addEventListener('click', function () {
 
 });
 
+// Grabbing various element using ID:
 const question = document.getElementById('question-box');
 const score = document.getElementById('score');
 const timer = document.getElementById('timer');
@@ -293,8 +302,11 @@ const quizContainer = document.getElementById('quiz-container');
 const quizResult = document.getElementById('quizResult');
 const resultButton = document.getElementById('resultBtn');
 const startAgain = document.getElementById('restartQuiz');
+
+// storing quiz name according to selected category
 var quizName;
 
+// function quiz start to start the quiz:
 function quizStart(qname) {
     quizName = qname;
     var quizArray = [];
@@ -307,6 +319,7 @@ function quizStart(qname) {
     var incorrectQues = 0;
     var quizScore = 0;
 
+    // pushing questions in quizarray according to selected category:
     switch (quizName) {
         case 'html': Array.prototype.push.apply(quizArray, htmlQuiz);
             break;
@@ -320,17 +333,22 @@ function quizStart(qname) {
             break;
     }
 
+    // calling timer function as the quiz starts
     startTimer();
 
+    // Quiz function called with question number
+    // here question number corresponds to question index in quiz array
     function quiz(qNo) {
-
+        // Current questionn number:
         document.getElementById('ques-number').innerText = (qNo + 1) + "/10"
 
+        // Populating question and and options in quiz box:
         question.innerHTML = "<p>" + quizArray[qNo].question + "</p>";
         for (let i = 0; i < 4; i++) {
             optBtn[i].innerText = quizArray[qNo].options[i];
         }
 
+        // Checking correct or incorrect question according to option selected:
         optBtn[0].onclick = function () {
             if (optBtn[0].value == quizArray[qNo].correct) {
                 quizScore += 1;
@@ -385,15 +403,14 @@ function quizStart(qname) {
             score.innerHTML = quizScore;
             disableButton();
         }
-
-        // score.innerHTML = quizScore;
     }
 
+    // Starting quiz from question one i.e. zero index. start will be false after below statement
     if (start) {
-
         quiz(0);
     }
 
+    // Handling next button
     next.onclick = function () {
         start = false;
         for (let k = 0; k < 4; k++) {
@@ -410,7 +427,7 @@ function quizStart(qname) {
             resultButton.style.display = "inline";
         }
     }
-
+    // Displaying result:
     resultButton.addEventListener('click', () => {
         quizContainer.style.display = 'none';
         document.getElementById('user').innerHTML = user;
@@ -423,6 +440,7 @@ function quizStart(qname) {
     });
 }
 
+// Handling go home button:
 const goHome = document.getElementById('goHome');
 goHome.onclick = function () {
     quizName = '';
@@ -434,7 +452,7 @@ goHome.onclick = function () {
     enableButton();
 }
 
-
+// Handling start again button
 startAgain.onclick = function () {
     quizContainer.style.display = 'block';
     quizResult.style.display = 'none';
